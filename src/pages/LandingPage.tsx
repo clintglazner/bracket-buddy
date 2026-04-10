@@ -83,8 +83,7 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
             </span>
           </h1>
           <p className="text-lg sm:text-xl text-white/60 max-w-2xl mx-auto leading-relaxed mb-10">
-            We built an AI analyst that connects live college baseball performance data to MLB Draft
-            prediction markets — surfacing undervalued prospects before Draft Day.
+            Play hard! Pick smart! Win proud!
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button
