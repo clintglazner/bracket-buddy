@@ -126,7 +126,7 @@ export default function AuthPage({ onAuth, onBack }: AuthPageProps) {
         <div className="mt-10 pt-6 border-t border-white/10 flex flex-col items-center gap-2">
           <span className="text-xs text-white/25 uppercase tracking-widest">Presented by</span>
           <img
-            src="/group logo.jpeg"
+            src="/group-logo.jpeg"
             alt="78 the GR8"
             className="h-12 opacity-50 object-contain"
           />
