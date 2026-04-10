@@ -6,9 +6,73 @@ interface MatchupCardProps {
   matchup: MatchupInsight;
 }
 
+interface KeyFactor {
+  label: string;
+  detail: string;
+  edge: string;
+}
+
+function computeKeyFactors(matchup: MatchupInsight): KeyFactor[] {
+  const { teamA, teamB } = matchup;
+  const isSingleTeam = teamA.teamName === teamB.teamName;
+
+  if (isSingleTeam) {
+    const factors: KeyFactor[] = [];
+    if (teamA.rank) factors.push({ label: 'National Ranking', detail: `#${teamA.rank} nationally`, edge: 'Top program' });
+    if (teamA.record) factors.push({ label: 'Season Record', detail: teamA.record, edge: `${teamA.record.split('-')[0]} wins` });
+    if (teamA.battingAvg && teamA.battingAvg !== 'N/A') factors.push({ label: 'Team Batting Avg', detail: teamA.battingAvg, edge: 'Offensive strength' });
+    return factors.slice(0, 3);
+  }
+
+  type ScoredFactor = KeyFactor & { weight: number };
+  const factors: ScoredFactor[] = [];
+
+  const rankA = teamA.rank || 25;
+  const rankB = teamB.rank || 25;
+  const rankEdge = rankA <= rankB ? teamA.teamName.split(' ')[0] : teamB.teamName.split(' ')[0];
+  factors.push({
+    label: 'National Ranking',
+    detail: `#${rankA} vs #${rankB}`,
+    edge: `${rankEdge} has the edge`,
+    weight: Math.abs(rankA - rankB) * 4 + 10,
+  });
+
+  if (teamA.record && teamB.record) {
+    const parseRecord = (r: string) => { const [w, l] = r.split('-').map(Number); return { w: w || 0, l: l || 0 }; };
+    const rA = parseRecord(teamA.record);
+    const rB = parseRecord(teamB.record);
+    const pctA = rA.w / (rA.w + rA.l) || 0.5;
+    const pctB = rB.w / (rB.w + rB.l) || 0.5;
+    const recEdge = pctA >= pctB ? teamA.teamName.split(' ')[0] : teamB.teamName.split(' ')[0];
+    factors.push({
+      label: 'Season Record',
+      detail: `${teamA.record} vs ${teamB.record}`,
+      edge: `${recEdge} has the edge`,
+      weight: Math.abs(pctA - pctB) * 100 + 8,
+    });
+  }
+
+  const avgA = parseFloat(teamA.battingAvg || '0');
+  const avgB = parseFloat(teamB.battingAvg || '0');
+  if (!isNaN(avgA) && !isNaN(avgB) && avgA > 0 && avgB > 0) {
+    const batEdge = avgA >= avgB ? teamA.teamName.split(' ')[0] : teamB.teamName.split(' ')[0];
+    factors.push({
+      label: 'Team Batting Avg',
+      detail: `${teamA.battingAvg} vs ${teamB.battingAvg}`,
+      edge: `${batEdge} leads offensively`,
+      weight: Math.abs(avgA - avgB) * 1000 + 6,
+    });
+  }
+
+  return factors
+    .sort((a, b) => b.weight - a.weight)
+    .slice(0, 3)
+    .map(({ label, detail, edge }) => ({ label, detail, edge }));
+}
+
 export default function MatchupCard({ matchup }: MatchupCardProps) {
-  const { teamA, teamB, summary, marketOdds, winProbabilityA, winProbabilityB, draftValueEdge } =
-    matchup;
+  const { teamA, teamB, summary, marketOdds, winProbabilityA, winProbabilityB, draftValueEdge } = matchup;
+  const keyFactors = computeKeyFactors(matchup);
 
   return (
     <Card variant="highlight" className="animate-slide-up h-full flex flex-col">
@@ -52,6 +116,28 @@ export default function MatchupCard({ matchup }: MatchupCardProps) {
           <span className="text-xs text-white/35 truncate max-w-[45%] text-right">{teamB.teamName.split(' ')[0]}</span>
         </div>
       </div>
+
+      {keyFactors.length > 0 && (
+        <div className="mb-4 bg-navy-900/60 rounded-xl p-4">
+          <p className="text-xs font-semibold text-white/50 uppercase tracking-widest mb-3">
+            Key Factors
+          </p>
+          <ul className="space-y-2.5">
+            {keyFactors.map((factor, i) => (
+              <li key={i} className="flex items-start gap-2.5">
+                <span className="mt-0.5 flex-shrink-0 w-4 h-4 rounded-full bg-accent-red/20 border border-accent-red/40 flex items-center justify-center">
+                  <span className="text-accent-red font-bold" style={{ fontSize: '9px' }}>{i + 1}</span>
+                </span>
+                <div>
+                  <span className="text-xs font-semibold text-white/80">{factor.label}: </span>
+                  <span className="text-xs text-white/55">{factor.detail}</span>
+                  <span className="text-xs text-accent-orange"> · {factor.edge}</span>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       <div className="mb-4">
         <p className="text-xs font-semibold text-white/50 uppercase tracking-widest mb-2">
