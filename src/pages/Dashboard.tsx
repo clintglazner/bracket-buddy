@@ -32,7 +32,7 @@ export default function Dashboard({ user, onSignOut }: DashboardProps) {
   const [pinLoading, setPinLoading] = useState(false);
   const [pinned, setPinned] = useState(false);
 
-  `const playPredictionSound = () => { if (!isMuted) { const audio = new Audio('/baseballaudio.mp3'); audio.play().catch(() => {}); } }; const handleRunComparison = async () => {`
+  const playPredictionSound = () => { if (!isMuted) { const audio = new Audio('/baseballaudio.mp3'); audio.play().catch(() => {}); } }; const handleRunComparison = async () => {
     if (!queryA.trim()) return;
     setState('loading');
     setMatchup(null);
