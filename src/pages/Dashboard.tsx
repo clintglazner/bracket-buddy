@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BookmarkCheck, GitCompare, Search, Sparkles } from 'lucide-react';
+import { BookmarkCheck, GitCompare, Search, Sparkles, Volume2, VolumeX } from 'lucide-react';
 import Button from '../components/ui/Button';
 import InputField from '../components/ui/InputField';
 import TeamCard from '../components/dashboard/TeamCard';
@@ -32,7 +32,7 @@ export default function Dashboard({ user, onSignOut }: DashboardProps) {
   const [pinLoading, setPinLoading] = useState(false);
   const [pinned, setPinned] = useState(false);
 
-  const handleRunComparison = async () => {
+  const playPredictionSound = () => { if (!isMuted) { const audio = new Audio('/baseballaudio.mp3'); audio.play().catch(() => {}); } }; const handleRunComparison = async () => {
     if (!queryA.trim()) return;
     setState('loading');
     setMatchup(null);
@@ -178,7 +178,7 @@ export default function Dashboard({ user, onSignOut }: DashboardProps) {
     }
   };
 
-  const isLoading = state === 'loading';
+  const [isMuted, setIsMuted] = useState(false);   const isLoading = state === 'loading';
   const hasResults = state === 'results' && matchup;
   const showTwoTeams = hasResults && matchup!.teamB.teamName !== matchup!.teamA.teamName;
 
@@ -230,15 +230,15 @@ export default function Dashboard({ user, onSignOut }: DashboardProps) {
               />
             </div>
             <Button
-              onClick={handleRunComparison}
+              onClick={() => { playPredictionSound(); handleRunComparison(); }}
               loading={isLoading}
               disabled={!queryA.trim() || isLoading}
               size="md"
               icon={isLoading ? undefined : <GitCompare size={16} />}
               className="shrink-0 h-[50px]"
             >
-              Make Prediction
-            </Button>
+              Make Prediction</Button><button onClick={() => setIsMuted(!isMuted)} className="shrink-0 h-[50px] px-3 rounded-xl border border-white/20 text-white/60 hover:text-white hover:border-white/40 transition-colors" title={isMuted ? 'Unmute sound' : 'Mute sound'}>{isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}</button>
+
           </div>
         </div>
       </div>
