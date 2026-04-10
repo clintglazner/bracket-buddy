@@ -74,7 +74,7 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
           </div>
           <div className="inline-flex items-center gap-2 bg-accent-red/15 border border-accent-red/30 rounded-full px-4 py-1.5 text-sm text-accent-red font-semibold mb-8">
             <Zap size={13} />
-            AI-Powered Draft Intelligence
+            College Baseball Win Probability
           </div>
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight mb-6">
             Meet Your
@@ -82,9 +82,8 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
               Bracket Buddy
             </span>
           </h1>
-          <p className="text-lg sm:text-xl text-white/60 max-w-2xl mx-auto leading-relaxed mb-10">
-            We built an AI analyst that connects live college baseball performance data to MLB Draft
-            prediction markets — surfacing undervalued prospects before Draft Day.
+          <p className="text-2xl sm:text-3xl font-bold text-white/60 max-w-2xl mx-auto leading-relaxed mb-4">
+            Stop Guessing. Start Winning Your Bracket.</p>           <p className="text-lg sm:text-xl text-white/60 max-w-2xl mx-auto leading-relaxed mb-4 font-bold">Compare College Baseball teams instantly. Our matchup predictor calculates the exact win probability so you can play hard, pick smart, and win proud.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button
