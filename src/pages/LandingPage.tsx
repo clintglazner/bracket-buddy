@@ -67,7 +67,7 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
         <div className="relative z-10 animate-slide-up">
           <div className="flex justify-center mb-8">
             <img
-              src="/Bracket Buddy.jpeg"
+              src="/bracket-buddy-logo.jpeg"
               alt="Bracket Buddy"
               className="h-48 w-auto object-contain rounded-2xl shadow-2xl"
             />
