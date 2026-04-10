@@ -316,26 +316,27 @@ export default function Dashboard({ user, onSignOut }: DashboardProps) {
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-center flex-wrap gap-8 sm:gap-14">
             {[
-              { name: 'UCLA Bruins', short: 'UCLA' },
-              { name: 'Texas Longhorns', short: 'Texas' },
-              { name: 'LSU Tigers', short: 'LSU' },
-              { name: 'Georgia Bulldogs', short: 'Georgia' },
-              { name: 'Texas A&M Aggies', short: 'Texas A&M' },
-              { name: 'Ole Miss Rebels', short: 'Ole Miss' },
-            ].map(({ name, short }) => (
-              <div
-                key={name}
-                className="group flex flex-col items-center gap-3 cursor-pointer"
-                onClick={() => setQueryA(name)}
-              >
-                <div className="w-24 h-24 rounded-2xl overflow-hidden border border-white/10 group-hover:border-white/30 group-hover:scale-110 transition-all duration-300 shadow-card bg-navy-800 flex items-center justify-center">
-                  <span className="text-white/40 text-xs font-bold text-center px-2">{short}</span>
-                </div>
-                <span className="text-xs text-white/40 group-hover:text-white/70 transition-colors duration-200 font-medium">
-                  {short}
-                </span>
-              </div>
-            ))}
+  { name: 'UCLA Bruins', short: 'UCLA', espnId: 26 },
+  { name: 'Texas Longhorns', short: 'Texas', espnId: 251 },
+  { name: 'LSU Tigers', short: 'LSU', espnId: 99 },
+  { name: 'Georgia Bulldogs', short: 'Georgia', espnId: 61 },
+  { name: 'Texas A&M Aggies', short: 'Texas A&M', espnId: 245 },
+  { name: 'Ole Miss Rebels', short: 'Ole Miss', espnId: 145 },
+].map(({ name, short, espnId }) => (
+  <div key={name} className="flex flex-col items-center gap-3">
+    <div className="w-24 h-24 rounded-2xl overflow-hidden border border-white/10 bg-navy-800 flex items-center justify-center">
+      <img
+        src={`https://a.espncdn.com/i/teamlogos/ncaa/500/${espnId}.png`}
+        alt={name}
+        className="w-full h-full object-contain p-2"
+        onError={(e) => {
+          (e.currentTarget as HTMLImageElement).style.display = 'none';
+        }}
+      />
+    </div>
+    <span className="text-xs text-white/40 font-medium">{short}</span>
+  </div>
+))}
           </div>
         </div>
       </div>

@@ -57,7 +57,7 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
         </Button>
       </nav>
 
-      <section className="relative max-w-7xl mx-auto px-6 pt-20 pb-32 text-center">
+      <section className="relative max-w-7xl mx-auto px-6 pt-12 pb-32 text-center">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-accent-red/8 rounded-full blur-[120px]" />
           <div className="absolute top-24 left-1/4 w-64 h-64 bg-accent-orange/6 rounded-full blur-[80px]" />
@@ -65,6 +65,13 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
         </div>
 
         <div className="relative z-10 animate-slide-up">
+          <div className="flex justify-center mb-8">
+            <img
+              src="/bracket-buddy-logo.jpeg"
+              alt="Bracket Buddy"
+              className="h-48 w-auto object-contain rounded-2xl shadow-2xl"
+            />
+          </div>
           <div className="inline-flex items-center gap-2 bg-accent-red/15 border border-accent-red/30 rounded-full px-4 py-1.5 text-sm text-accent-red font-semibold mb-8">
             <Zap size={13} />
             AI-Powered Draft Intelligence

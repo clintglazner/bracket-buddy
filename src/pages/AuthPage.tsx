@@ -23,7 +23,9 @@ export default function AuthPage({ onAuth, onBack }: AuthPageProps) {
     const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
       email,
       password,
-      options: { data: { name: name || email } },
+      options: {
+        data: { name: name || email }
+      },
     });
 
     if (!signUpError && signUpData.user && signUpData.session) {
@@ -67,12 +69,10 @@ export default function AuthPage({ onAuth, onBack }: AuthPageProps) {
         >
           ← Back
         </button>
-
         <h1 className="text-3xl font-extrabold text-white mb-2">Sign in</h1>
         <p className="text-white/40 text-sm mb-8">
           New users are created automatically on first sign in.
         </p>
-
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-xs font-semibold text-white/50 uppercase tracking-widest mb-1.5">
@@ -86,7 +86,6 @@ export default function AuthPage({ onAuth, onBack }: AuthPageProps) {
               className="w-full bg-navy-800 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-accent-orange/50 transition-colors"
             />
           </div>
-
           <div>
             <label className="block text-xs font-semibold text-white/50 uppercase tracking-widest mb-1.5">
               Email
@@ -100,7 +99,6 @@ export default function AuthPage({ onAuth, onBack }: AuthPageProps) {
               className="w-full bg-navy-800 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-accent-orange/50 transition-colors"
             />
           </div>
-
           <div>
             <label className="block text-xs font-semibold text-white/50 uppercase tracking-widest mb-1.5">
               Password
@@ -115,9 +113,7 @@ export default function AuthPage({ onAuth, onBack }: AuthPageProps) {
               className="w-full bg-navy-800 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-accent-orange/50 transition-colors"
             />
           </div>
-
           {error && <p className="text-red-400 text-sm">{error}</p>}
-
           <button
             type="submit"
             disabled={loading}
@@ -126,6 +122,16 @@ export default function AuthPage({ onAuth, onBack }: AuthPageProps) {
             {loading ? 'Signing in...' : 'Continue'}
           </button>
         </form>
+
+        <div className="mt-10 pt-6 border-t border-white/10 flex flex-col items-center gap-2">
+          <span className="text-xs text-white/25 uppercase tracking-widest">Presented by</span>
+          <img
+            src="/group-logo.jpeg"
+            alt="78 the GR8"
+            className="h-12 opacity-50 object-contain"
+          />
+        </div>
+
       </div>
     </div>
   );
