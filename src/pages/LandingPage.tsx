@@ -82,7 +82,7 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
               Bracket Buddy
             </span>
           </h1>
-          <p className="text-lg sm:text-xl text-white/60 max-w-2xl mx-auto leading-relaxed mb-10">
+          <p className="text-2xl sm:text-3xl font-bold text-white/60 max-w-2xl mx-auto leading-relaxed mb-4">
             Stop Guessing. Start Winning Your Bracket.</p>           <p className="text-lg sm:text-xl text-white/60 max-w-2xl mx-auto leading-relaxed mb-4 font-bold">Compare College Baseball teams instantly. Our matchup predictor calculates the exact win probability so you can play hard, pick smart, and win proud.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
