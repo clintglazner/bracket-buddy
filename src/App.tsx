@@ -57,7 +57,7 @@ export default function App() {
   }
 
   if (appState === 'landing') {
-    return <LandingPage onGetStarted={() => setAppState('auth')} />;
+    return <LandingPage onNavigate={() => setAppState('auth')} />;
   }
 
   if (appState === 'auth') {
