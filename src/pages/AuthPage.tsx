@@ -70,11 +70,16 @@ export default function AuthPage({ onAuth, onBack }: AuthPageProps) {
           ← Back
         </button>
         <h1 className="text-3xl font-extrabold text-white mb-2">Sign in</h1>
-        <p className="text-white/40 text-sm mb-8">
+        <p className="text-white/40 text-sm mb-3">
           New users are created automatically on first sign in.
         </p>
+                  <div className="bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 mb-8 text-center">
+                              <p className="text-white/50 text-xs">
+                                            🎯 <span className="font-semibold text-white/70">Demo mode</span> — any email and password will work
+                              </p>
+                  </div>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
+          <div
             <label className="block text-xs font-semibold text-white/50 uppercase tracking-widest mb-1.5">
               Name (optional)
             </label>
