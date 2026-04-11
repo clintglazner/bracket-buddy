@@ -79,7 +79,7 @@ export default function AuthPage({ onAuth, onBack }: AuthPageProps) {
                               </p>
                   </div>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div
+          <div>
             <label className="block text-xs font-semibold text-white/50 uppercase tracking-widest mb-1.5">
               Name (optional)
             </label>
